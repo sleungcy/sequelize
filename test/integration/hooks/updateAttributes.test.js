@@ -35,7 +35,7 @@ describe(Support.getTestDialectTeaser('Hooks'), () => {
         this.User.afterSave(afterSave);
 
         return this.User.create({username: 'Toni', mood: 'happy'}).then(user => {
-          user.username = "Chong"
+          user.username = "chong"
           user.save().then( user => {
             expect(beforeHook).to.have.been.calledOnce;
             expect(afterHook).to.have.been.calledOnce;
