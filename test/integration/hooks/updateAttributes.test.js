@@ -39,9 +39,9 @@ describe(Support.getTestDialectTeaser('Hooks'), () => {
           user.save().then( user => {
             expect(beforeHook).to.have.been.notCalled;
             expect(afterHook).to.have.been.notCalled;
-            expect(beforeSave).to.have.been.calledTwice;
-            expect(afterSave).to.have.been.calledTwice;
-            expect(user.username).to.equal('Chong');
+            expect(beforeSave).to.have.been.calledOnce;
+            expect(afterSave).to.have.been.calledOnce;
+            expect(user.username).to.equal('chong');
           });
         });
       });
