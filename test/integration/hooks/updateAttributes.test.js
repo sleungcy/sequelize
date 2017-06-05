@@ -37,8 +37,8 @@ describe(Support.getTestDialectTeaser('Hooks'), () => {
         return this.User.create({username: 'Toni', mood: 'happy'}).then(user => {
           user.username = "chong"
           user.save().then( user => {
-            expect(beforeHook).to.have.been.calledOnce;
-            expect(afterHook).to.have.been.calledOnce;
+            expect(beforeHook).to.have.been.notCalled;
+            expect(afterHook).to.have.been.notCalled;
             expect(beforeSave).to.have.been.calledTwice;
             expect(afterSave).to.have.been.calledTwice;
             expect(user.username).to.equal('Chong');
