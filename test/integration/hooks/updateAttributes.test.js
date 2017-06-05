@@ -22,6 +22,30 @@ describe(Support.getTestDialectTeaser('Hooks'), () => {
   });
 
   describe('#updateAttributes', () => {
+    describe('on success when using = sign to update', () => {
+      it('should run hooks', function() {
+        const beforeHook = sinon.spy(),
+          afterHook = sinon.spy(),
+          beforeSave = sinon.spy(),
+          afterSave = sinon.spy();
+
+        this.User.beforeUpdate(beforeHook);
+        this.User.afterUpdate(afterHook);
+        this.User.beforeSave(beforeSave);
+        this.User.afterSave(afterSave);
+
+        return this.User.create({username: 'Toni', mood: 'happy'}).then(user => {
+          user.username = "Chong"
+          user.save().then( user => {
+            expect(beforeHook).to.have.been.calledOnce;
+            expect(afterHook).to.have.been.calledOnce;
+            expect(beforeSave).to.have.been.calledTwice;
+            expect(afterSave).to.have.been.calledTwice;
+            expect(user.username).to.equal('Chong');
+          });
+        });
+      });
+    });
     describe('on success', () => {
       it('should run hooks', function() {
         const beforeHook = sinon.spy(),
